@@ -97,27 +97,30 @@ public class CirclePercentView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        mEndAngle = (int) (mCurPercent * 3.6);
+        mEndAngle = (int) (mCurPercent * 3.6);//mCurPercent=0~100.则mEndAngle=0~360.
         //绘制大圆
         Paint bigCirclePaint = new Paint();
-        bigCirclePaint.setAntiAlias(true);
+        bigCirclePaint.setAntiAlias(true);//抗锯齿,同:别名alias.
         bigCirclePaint.setColor(mBigColor);
 
         canvas.drawCircle(x, y, mRadius, bigCirclePaint);
 
-        //饼状图
+        //饼状图,
         Paint sectorPaint = new Paint();
         sectorPaint.setColor(mSmallColor);
         sectorPaint.setAntiAlias(true);
+
+        //精度不一样。Rect是使用int类型作为数值，RectF是使用float类型作为数值。
         RectF rect = new RectF(0, 0, mWidth, mHeight);
 
-        canvas.drawArc(rect, 270, mEndAngle, true, sectorPaint);
+//        圆弧arc,即扇形.
+        canvas.drawArc(rect, 0, mEndAngle, true, sectorPaint);
 
-        //绘制小圆,颜色透明
-        Paint smallCirclePaint = new Paint();
-        smallCirclePaint.setAntiAlias(true);
-        smallCirclePaint.setColor(mBigColor);
-        canvas.drawCircle(x, y, mRadius - mStripeWidth, smallCirclePaint);
+//        //绘制小圆,颜色 同 大圆.
+//        Paint smallCirclePaint = new Paint();
+//        smallCirclePaint.setAntiAlias(true);
+//        smallCirclePaint.setColor(mBigColor);
+//        canvas.drawCircle(x, y, mRadius - mStripeWidth, smallCirclePaint);
 
         //绘制文本
         Paint textPaint = new Paint();
